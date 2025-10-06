@@ -1,4 +1,7 @@
 import view.Menu;
+
+import java.util.Collection;
+import controller.CollectionController;
 import controller.UserController;
 
 public class Program {
@@ -7,6 +10,9 @@ public class Program {
 
         UserController userController = new UserController();
         userController.inicializarUsuarios();
+
+        CollectionController collectionController = new CollectionController();
+        collectionController.initializeBooks();
 
         Menu menu = new Menu();
         menu.displayMainMenu();

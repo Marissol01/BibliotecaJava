@@ -1,10 +1,7 @@
 package view;
 
 import java.util.Scanner;
-import view.Menu;
-import view.Menu;
-import controller.UserController;
-import models.UserCustomer;
+
 
 public class CustomerMenu {
 
