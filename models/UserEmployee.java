@@ -1,7 +1,12 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserEmployee extends User {
     private String pin;
+
+    private static List<UserEmployee> employees = new ArrayList<>();
 
     public UserEmployee(String fullName, String cpf, String password, String phoneNumber, String pin) {
         super(fullName, cpf, password, phoneNumber);
@@ -12,8 +17,11 @@ public class UserEmployee extends User {
     public void setPin(String pin) { this.pin = pin; }
 
     public static void add(UserEmployee userEmployee) {
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
+        employees.add(userEmployee);
     }
 
+    public static List<UserEmployee> getAll() {
+        return employees;
+    }
 }
 

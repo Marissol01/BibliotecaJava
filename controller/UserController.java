@@ -14,12 +14,8 @@ public class UserController {
     }
 
     public void inicializarUsuarios() {
-        UserEmployee.add(new UserEmployee("Maria", "789123456", "senha123", "40028922", "1011"));
-
         UserCustomer.add(new UserCustomer("Ana", "3456", "senha123", "89224002"));
+        UserEmployee.add(new UserEmployee("Maria", "789123456", "senha123", "40028922", "1011"));
     }
 
-    
-
-    
 }

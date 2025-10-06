@@ -14,6 +14,10 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
+    public boolean verifyPassword(String password) {
+        return this.password.equals(password);
+    }
+
     public String getFullName() {
         return fullName;
     }

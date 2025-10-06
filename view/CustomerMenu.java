@@ -2,31 +2,54 @@ package view;
 
 import java.util.Scanner;
 import view.Menu;
-import java.util.Scanner;
+import view.Menu;
 import controller.UserController;
 import models.UserCustomer;
 
 public class CustomerMenu {
 
-    public class EmployeeMenu {
+    Scanner sc = new Scanner(System.in);
+    private Menu mainMenu;
 
-        public void displayCustomerMenu() {
-            Scanner sc = new Scanner(System.in);
+    public CustomerMenu(Menu menu) {
+        this.mainMenu = menu;
+    }
 
-            System.out.println("Menu do Membro");
-            System.out.println("Escolha uma das opções: ");
+    public void displayCustomerMenu() {
+        while (true) {
+            System.out.println("\nMenu do Membro");
             System.out.println("1. Ver livros disponíveis");
             System.out.println("2. Ver meus empréstimos");
             System.out.println("3. Fazer empréstimo");
             System.out.println("4. Devolver livro");
             System.out.println("5. Sair");
-            System.err.println("------------------------------------");
-            System.out.println("Opção selecionada: ");
+            System.out.println("------------------------------------");
+            System.out.print("Opção selecionada: ");
+
             int choice = sc.nextInt();
+            sc.nextLine();
 
             switch (choice) {
                 case 1:
+                    System.out.println("Mostrando livros disponíveis...");
+                    break;
+                case 2:
+                    System.out.println("Mostrando seus empréstimos...");
+                    break;
+                case 3:
+                    System.out.println("Fazendo novo empréstimo...");
+                    break;
+                case 4:
+                    System.out.println("Devolvendo livro...");
+                    break;
+                case 5:
+                    System.out.println("Saindo do menu do membro...");
+                    mainMenu.displayMainMenu();
+                    return;
 
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
             }
         }
     }
