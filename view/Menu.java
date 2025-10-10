@@ -1,6 +1,8 @@
 package view;
 
 import java.util.Scanner;
+
+import controller.CollectionController;
 import controller.UserController;
 import models.UserCustomer;
 import models.UserEmployee;
@@ -12,13 +14,14 @@ public class Menu {
 
     public void displayMainMenu() {
 
-        System.out.println("Bem vindo a Biblioteca Java!");
+        System.out.println("\n Bem vindo a Biblioteca Java!");
         System.out.println("Escolha uma das opções: ");
         System.out.println("1. Login Membro");
         System.out.println("2. Não sou cadastrado");
         System.out.println("3. Login Funcionário");
         System.out.println("4. Sair");
-        System.err.println("------------------------------------");
+        System.out.println(
+                "+-------------------------------------------------------------------------------------+");
         System.out.println("Opção selecionada: ");
         int choice = sc.nextInt();
         sc.nextLine();
@@ -47,6 +50,8 @@ public class Menu {
     public void loginCustomer() {
         UserController userController = new UserController();
 
+        System.out.println(
+                "+-------------------------------------------------------------------------------------+");
         System.out.println("Login Membro");
         System.out.println("Digite seu CPF: ");
         String cpf = sc.nextLine();
@@ -55,8 +60,8 @@ public class Menu {
 
         for (UserCustomer userCustomer : UserCustomer.getAll()) {
             if (userCustomer.getCpf().equals(cpf) && userCustomer.verifyPassword(password)) {
-                System.out.println("Login bem-sucedido! Bem-vindo, " + userCustomer.getFullName());
-                new CustomerMenu(this).displayCustomerMenu(); // passa o menu principal
+                System.out.println("\n Login bem-sucedido! Bem-vindo(a), " + userCustomer.getFullName() + "!");
+                new CustomerMenu(this, new CollectionController(), userCustomer.getFullName()).displayCustomerMenu();
                 return;
             }
         }
@@ -82,6 +87,8 @@ public class Menu {
     }
 
     public void loginEmployee() {
+        System.out.println(
+                "+-------------------------------------------------------------------------------------+");
         System.out.println("Login Funcionário");
         System.out.println("Digite seu PIN: ");
         String pin = sc.nextLine();

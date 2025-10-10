@@ -1,0 +1,48 @@
+Planejamento:
+
+Integrate CustomerMenu with CollectionController(Feito 10/10)
+
+- Implementada comunicação entre CustomerMenu e CollectionController;
+- Métodos listBooksCustomer, borrowBook e returnBook agora são acessíveis via menu de membro;
+- Melhora no CustomerMenu visualmente.
+
+Implement EmployeeMenu and book management features
+
+- Criado EmployeeMenu com opções de listar, adicionar e remover livros;
+- Adicionados métodos para visualizar quem está com cada livro emprestado;
+- Integrado EmployeeMenu ao sistema principal de login.
+
+Refactor UserController for login handling
+
+- Centralizada autenticação de membros e funcionários no UserController;
+- Adicionados métodos loginCustomer e loginEmployee;
+- Menu principal atualizado para usar UserController em vez de autenticação direta.
+
+Improve user experience and input validation
+
+- Adicionadas mensagens de sucesso e erro mais descritivas;
+- Implementada validação de entradas de menu e CPF/PIN;
+- Prevenidos erros de InputMismatchException.
+
+Show logged user information in menus
+
+- Adicionado nome do usuário logado no topo dos menus;
+- Ajustada navegação para retorno correto ao menu principal.
+
+Refactor package structure and improve code organization
+
+- Reorganizados pacotes: controller, models e view;
+- Removidos códigos de teste e redundâncias;
+- Revisada nomenclatura de métodos e comentários.
+
+Add project documentation and usage instructions
+
+- Criado README.md com descrição do sistema, tecnologias e estrutura de pastas;
+- Incluídas instruções de execução e credenciais de teste;
+- Adicionado print ilustrativo da execução no terminal.
+
+Release stable version 1.0
+
+- Sistema completo e funcional;
+- Menus e controladores integrados;
+- Testes de login, empréstimo e devolução concluídos com sucesso.

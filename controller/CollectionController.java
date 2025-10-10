@@ -8,6 +8,10 @@ public class CollectionController {
 
     private List<Book> books = new ArrayList<>();
 
+    public CollectionController() {
+        initializeBooks();
+    }
+
     public List<Book> getBooks() {
         return books;
     }
@@ -15,7 +19,7 @@ public class CollectionController {
     public void initializeBooks() {
         books.add(new Book(1, "Quarto de Despejo", "Carolina Maria De Jesus", "111-1", "Romance", 1960, true, null));
         books.add(new Book(2, "A Hora da Estrela", "Clarice Lispector", "222-3", "Romance", 1977, false, "Ana"));
-        books.add(new Book(3, "Crime e Castigo", "Fiódor Dostoiévski", "333-3", "Romance", 1866, true, null));
+        books.add(new Book(3, "Crime e Castigo", "Fiodor Dostoievski", "333-3", "Romance", 1866, true, null));
     }
 
     public void addBook(Book b) {
@@ -26,41 +30,76 @@ public class CollectionController {
         books.removeIf(b -> b.getId() == id);
     }
 
-    public void listBooks() {
-        System.out.println("———————————————————————————————————————");
-        System.out.println("Lista de livros");
-        System.out.printf("%-30s %-20s %-15s %-12s %-20s%n", "Título", "Autor", "ISBN", "Disponível",
-                "Emprestado para");
-        for (Book b : books) {
-            System.out.printf("%-30s %-20s %-15s %-12s %-20s%n",
-                    b.getTitle(),
-                    b.getAuthor(),
-                    b.getIsbn(),
-                    b.isAvailable() ? "Sim" : "Não",
-                    b.isAvailable() ? "-" : b.getBorrowerFullName());
+    public void listBooksCustomer() {
+        System.out.println("\n+-------------------------------------------------------------------------------------+");
+        System.out.printf("%-25s %-30s %-10s %-12s%n",
+                "Título", "Autor", "ISBN", "Disponível");
+        System.out.println("+-------------------------------------------------------------------------------------+");
+
+        for (Book book : books) {
+            String disponivel = (book.getBorrowerFullName() == null) ? "Sim" : "Não";
+
+            System.out.printf("%-25s %-30s %-10s %-12s%n",
+                    book.getTitle(), book.getAuthor(), book.getIsbn(), disponivel);
         }
+
+        System.out.println("+-------------------------------------------------------------------------------------+");
     }
 
-    public boolean borrowBook(int id, String borrowerName) {
+    public void listBooksEmployee() {
+        System.out.println(
+                "\n+-------------------------------------------------------------------------------------+");
+        System.out.printf("%-25s %-30s %-10s %-12s %-20s%n",
+                "Título", "Autor", "ISBN", "Disponível", "Emprestado para");
+        System.out.println(
+                "+-------------------------------------------------------------------------------------+");
+
+        for (Book book : books) {
+            String disponivel = (book.getBorrowerFullName() == null) ? "Sim" : "Não";
+            String emprestadoPara = (book.getBorrowerFullName() == null) ? "-" : book.getBorrowerFullName();
+
+            System.out.printf("%-25s %-30s %-10s %-12s %-20s%n",
+                    book.getTitle(), book.getAuthor(), book.getIsbn(), disponivel, emprestadoPara);
+        }
+
+        System.out.println(
+                "+-------------------------------------------------------------------------------------+");
+    }
+
+    public boolean borrowBook(String title, String borrowerName) {
         for (Book b : books) {
-            if (b.getId() == id && b.isAvailable()) {
-                b.setAvailable(false);
-                b.setBorrowerFullName(borrowerName);
-                return true;
+            if (b.getTitle().equalsIgnoreCase(title)) {
+                if (b.isAvailable()) {
+                    b.setAvailable(false);
+                    b.setBorrowerFullName(borrowerName);
+                    System.out.println("Empréstimo realizado com sucesso. Devolva em 7 dias! ");
+                    System.out.println(
+                            "+-------------------------------------------------------------------------------------+");
+                    return true;
+                } else {
+                    System.out.println("" + b.getTitle() + " não esta disponivel para empréstimo no momento.");
+
+                    return false;
+                }
             }
         }
-        System.out.println("Livro indisponível para empréstimo :(");
+        System.out.println("Livro com título \"" + title + "\" não encontrado.");
+        System.out.println(
+                "+-------------------------------------------------------------------------------------+");
         return false;
     }
 
-    public boolean returnBook(int id) {
+    public boolean returnBook(String title) {
+        String trimmedTitle = title.trim().toLowerCase();
         for (Book b : books) {
-            if (b.getId() == id && !b.isAvailable()) {
+            if (b.getTitle().equalsIgnoreCase(title) && !b.isAvailable()) {
                 b.setAvailable(true);
                 b.setBorrowerFullName(null);
+                System.out.println("Livro \"" + b.getTitle() + "\" devolvido com sucesso!");
                 return true;
             }
         }
+        System.out.println("Livro \"" + title + "\" não encontrado ou não está emprestado.");
         return false;
     }
 

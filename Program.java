@@ -1,6 +1,5 @@
 import view.Menu;
 
-import java.util.Collection;
 import controller.CollectionController;
 import controller.UserController;
 
